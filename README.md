@@ -2,6 +2,9 @@
 
 ⭐ 测试端口 TCP/HTTP 协议连通性命令行工具 ⭐
 
+[![pipeline status](https://gitlab.soraharu.com/XiaoXi/TCPing/badges/master/pipeline.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/commits/master)
+[![Latest Release](https://gitlab.soraharu.com/XiaoXi/TCPing/-/badges/release.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/releases)
+
 ## 🤔 这是什么
 
 一款能够便捷测试端口 TCP/HTTP 协议连通性的命令行工具，使用 Golang 编写，适配 Windows、Linux、FreeBSD 操作系统以及 x86、amd64、arm、arm64、mips、mipsle 处理器架构。
