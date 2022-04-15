@@ -1,0 +1,235 @@
+image: golang:alpine
+
+stages:
+  - test
+  - build
+
+test-ping:
+  stage: test
+  tags:
+    - linuxdocker
+  script:
+    - go run ./main.go https://soraharu.com
+
+#########################
+#        Windows        #
+#########################
+
+windows-amd64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=windows GOARCH=amd64 go build -o ./tcping.exe ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping.exe
+  rules:
+    - if: $CI_COMMIT_TAG
+
+windows-i386:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=windows GOARCH=386 go build -o ./tcping.exe ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping.exe
+  rules:
+    - if: $CI_COMMIT_TAG
+
+windows-arm64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=windows GOARCH=arm64 go build -o ./tcping.exe ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping.exe
+  rules:
+    - if: $CI_COMMIT_TAG
+
+#########################
+#         MacOS         #
+#########################
+
+darwin-amd64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=darwin GOARCH=amd64 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+darwin-arm64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=darwin GOARCH=arm64 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+#########################
+#    Linux X86/AMD64    #
+#########################
+
+linux-amd64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=linux GOARCH=amd64 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+linux-i386:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=linux GOARCH=386 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+#########################
+#       Linux ARM       #
+#########################
+
+linux-arm64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=linux GOARCH=arm64 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+linux-arm:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=linux GOARCH=arm GOARM=6 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+#########################
+#   Linux MIPS/MIPSLE   #
+#########################
+
+linux-mips:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=linux GOARCH=mips GOMIPS=softfloat go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+linux-mipsle:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+#########################
+#   FreeBSD X86/AMD64   #
+#########################
+
+freebsd-amd64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=freebsd GOARCH=amd64 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+freebsd-i386:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=freebsd GOARCH=386 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+#########################
+#      FreeBSD ARM      #
+#########################
+
+freebsd-arm64:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=freebsd GOARCH=arm64 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
+
+freebsd-arm:
+  stage: build
+  tags:
+    - linuxdocker
+  script:
+    - GOOS=freebsd GOARCH=arm GOARM=6 go build -o ./tcping ./main.go
+  artifacts:
+    name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
+    paths:
+      - ./tcping
+  rules:
+    - if: $CI_COMMIT_TAG
