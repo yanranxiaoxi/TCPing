@@ -2,8 +2,7 @@
 
 ⭐ 测试端口 TCP/HTTP 协议连通性命令行工具 ⭐
 
-[![pipeline status](https://gitlab.soraharu.com/XiaoXi/TCPing/badges/master/pipeline.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/commits/master)
-[![Latest Release](https://gitlab.soraharu.com/XiaoXi/TCPing/-/badges/release.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/releases)
+[![pipeline status](https://gitlab.soraharu.com/XiaoXi/TCPing/badges/master/pipeline.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/commits/master) [![Latest Release](https://gitlab.soraharu.com/XiaoXi/TCPing/-/badges/release.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/releases)
 
 ## 🤔 这是什么
 
