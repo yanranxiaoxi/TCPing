@@ -1,26 +1,34 @@
-image: golang:1.18-alpine
-
 stages:
   - test
   - build
+  - upload
+  - release
+
+#########################
+#         Test          #
+#########################
 
 test-ping:
   stage: test
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - go run ./main.go soraharu.com 443
     - go run ./main.go -H soraharu.com
     - go run ./main.go https://soraharu.com
 
 #########################
-#        Windows        #
+#         Build         #
 #########################
+
+# ------ Windows ------ #
 
 windows-amd64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=windows GOARCH=amd64 go build -o ./tcping.exe ./main.go
   artifacts:
@@ -34,6 +42,7 @@ windows-i386:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=windows GOARCH=386 go build -o ./tcping.exe ./main.go
   artifacts:
@@ -47,6 +56,7 @@ windows-arm64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=windows GOARCH=arm64 go build -o ./tcping.exe ./main.go
   artifacts:
@@ -56,14 +66,13 @@ windows-arm64:
   rules:
     - if: $CI_COMMIT_TAG
 
-#########################
-#         MacOS         #
-#########################
+# ------- MacOS ------- #
 
 darwin-amd64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=darwin GOARCH=amd64 go build -o ./tcping ./main.go
   artifacts:
@@ -77,6 +86,7 @@ darwin-arm64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=darwin GOARCH=arm64 go build -o ./tcping ./main.go
   artifacts:
@@ -86,14 +96,13 @@ darwin-arm64:
   rules:
     - if: $CI_COMMIT_TAG
 
-#########################
-#    Linux X86/AMD64    #
-#########################
+# -- Linux X86/AMD64 -- #
 
 linux-amd64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=linux GOARCH=amd64 go build -o ./tcping ./main.go
   artifacts:
@@ -107,6 +116,7 @@ linux-i386:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=linux GOARCH=386 go build -o ./tcping ./main.go
   artifacts:
@@ -116,14 +126,13 @@ linux-i386:
   rules:
     - if: $CI_COMMIT_TAG
 
-#########################
-#       Linux ARM       #
-#########################
+# ----- Linux ARM ----- #
 
 linux-arm64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=linux GOARCH=arm64 go build -o ./tcping ./main.go
   artifacts:
@@ -137,6 +146,7 @@ linux-arm:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=linux GOARCH=arm GOARM=6 go build -o ./tcping ./main.go
   artifacts:
@@ -146,14 +156,13 @@ linux-arm:
   rules:
     - if: $CI_COMMIT_TAG
 
-#########################
-#   Linux MIPS/MIPSLE   #
-#########################
+# - Linux MIPS/MIPSLE - #
 
 linux-mips:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=linux GOARCH=mips GOMIPS=softfloat go build -o ./tcping ./main.go
   artifacts:
@@ -167,6 +176,7 @@ linux-mipsle:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build -o ./tcping ./main.go
   artifacts:
@@ -176,14 +186,13 @@ linux-mipsle:
   rules:
     - if: $CI_COMMIT_TAG
 
-#########################
-#   FreeBSD X86/AMD64   #
-#########################
+# - FreeBSD X86/AMD64 - #
 
 freebsd-amd64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=freebsd GOARCH=amd64 go build -o ./tcping ./main.go
   artifacts:
@@ -197,6 +206,7 @@ freebsd-i386:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=freebsd GOARCH=386 go build -o ./tcping ./main.go
   artifacts:
@@ -206,14 +216,13 @@ freebsd-i386:
   rules:
     - if: $CI_COMMIT_TAG
 
-#########################
-#      FreeBSD ARM      #
-#########################
+# ---- FreeBSD ARM ---- #
 
 freebsd-arm64:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=freebsd GOARCH=arm64 go build -o ./tcping ./main.go
   artifacts:
@@ -227,6 +236,7 @@ freebsd-arm:
   stage: build
   tags:
     - linuxdocker
+  image: golang:1.18-alpine
   script:
     - GOOS=freebsd GOARCH=arm GOARM=6 go build -o ./tcping ./main.go
   artifacts:
@@ -235,3 +245,66 @@ freebsd-arm:
       - ./tcping
   rules:
     - if: $CI_COMMIT_TAG
+
+#########################
+#        Upload         #
+#########################
+
+upload:
+  stage: upload
+  tags:
+    - windows10shell
+  rules:
+    - if: $CI_COMMIT_TAG
+  dependencies: []
+  script:
+    - Set-Location "D:\Website\wwwroot\downloadserver.soraharu.com\TCPing\";
+    - if (Test-Path ".\${CI_COMMIT_TAG}\") {
+        Remove-Item ".\${CI_COMMIT_TAG}\" -Recurse;
+      }
+    - New-Item -Path ".\${CI_COMMIT_TAG}\" -ItemType Directory;
+    - Set-Location ".\${CI_COMMIT_TAG}\";
+    - ${releaseNameArray} =
+        ”windows-amd64”, “windows-i386”, ”windows-arm64”,
+        ”darwin-amd64”, ”darwin-arm64”,
+        ”linux-amd64”, ”linux-i386”,
+        ”linux-arm64”, ”linux-arm”,
+        ”linux-mips”, ”linux-mipsle”,
+        ”freebsd-amd64”, ”freebsd-i386”,
+        ”freebsd-arm64”, ”freebsd-arm”;
+    - foreach (${releaseName} in ${releaseNameArray}) {
+        Invoke-WebRequest
+          -Uri "${CI_PROJECT_URL}/-/jobs/artifacts/${CI_COMMIT_TAG}/download?job=${releaseName}"
+          -OutFile ".\tcping-${releaseName}-${CI_COMMIT_TAG}.zip";
+      }
+
+#########################
+#        Release        #
+#########################
+
+release:
+  stage: release
+  tags:
+    - linuxdocker
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  dependencies: []
+  script:
+    - |
+      release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
+        --assets-link "{\"name\":\"tcping-windows-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-windows-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-windows-i386-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-windows-i386-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-windows-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-windows-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-darwin-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-darwin-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-darwin-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-darwin-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-linux-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-linux-i386-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-i386-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-linux-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-linux-arm-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-arm-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-linux-mips-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-mips-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-linux-mipsle-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-mipsle-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-freebsd-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-freebsd-i386-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-i386-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-freebsd-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping-freebsd-arm-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-arm-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}"
