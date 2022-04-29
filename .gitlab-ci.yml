@@ -30,11 +30,13 @@ windows-amd64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=windows GOARCH=amd64 go build -o ./tcping.exe ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=windows GOARCH=amd64 go build -o ./artifacts/$CI_JOB_NAME/tcping.exe ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping.exe
+      - ./artifacts/$CI_JOB_NAME/tcping.exe
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -44,11 +46,13 @@ windows-i386:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=windows GOARCH=386 go build -o ./tcping.exe ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=windows GOARCH=386 go build -o ./artifacts/$CI_JOB_NAME/tcping.exe ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping.exe
+      - ./artifacts/$CI_JOB_NAME/tcping.exe
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -58,11 +62,13 @@ windows-arm64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=windows GOARCH=arm64 go build -o ./tcping.exe ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=windows GOARCH=arm64 go build -o ./artifacts/$CI_JOB_NAME/tcping.exe ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping.exe
+      - ./artifacts/$CI_JOB_NAME/tcping.exe
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -74,11 +80,13 @@ darwin-amd64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=darwin GOARCH=amd64 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=darwin GOARCH=amd64 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -88,11 +96,13 @@ darwin-arm64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=darwin GOARCH=arm64 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=darwin GOARCH=arm64 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -104,11 +114,13 @@ linux-amd64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=linux GOARCH=amd64 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=linux GOARCH=amd64 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -118,11 +130,13 @@ linux-i386:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=linux GOARCH=386 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=linux GOARCH=386 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -134,11 +148,13 @@ linux-arm64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=linux GOARCH=arm64 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=linux GOARCH=arm64 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -148,11 +164,13 @@ linux-arm:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=linux GOARCH=arm GOARM=6 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=linux GOARCH=arm GOARM=6 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -164,11 +182,13 @@ linux-mips:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=linux GOARCH=mips GOMIPS=softfloat go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=linux GOARCH=mips GOMIPS=softfloat go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -178,11 +198,13 @@ linux-mipsle:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -194,11 +216,13 @@ freebsd-amd64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=freebsd GOARCH=amd64 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=freebsd GOARCH=amd64 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -208,11 +232,13 @@ freebsd-i386:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=freebsd GOARCH=386 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=freebsd GOARCH=386 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -224,11 +250,13 @@ freebsd-arm64:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=freebsd GOARCH=arm64 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=freebsd GOARCH=arm64 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -238,11 +266,13 @@ freebsd-arm:
     - linuxdocker
   image: golang:1.18-alpine
   script:
-    - GOOS=freebsd GOARCH=arm GOARM=6 go build -o ./tcping ./main.go
+    - mkdir ./artifacts/
+    - mkdir ./artifacts/$CI_JOB_NAME/
+    - GOOS=freebsd GOARCH=arm GOARM=6 go build -o ./artifacts/$CI_JOB_NAME/tcping ./main.go
   artifacts:
     name: "tcping-$CI_JOB_NAME-$CI_COMMIT_TAG"
     paths:
-      - ./tcping
+      - ./artifacts/$CI_JOB_NAME/tcping
   rules:
     - if: $CI_COMMIT_TAG
 
@@ -256,7 +286,6 @@ upload:
     - windows10shell
   rules:
     - if: $CI_COMMIT_TAG
-  dependencies: []
   script:
     - Set-Location "D:\Website\wwwroot\downloadserver.soraharu.com\TCPing\";
     - if (Test-Path ".\${CI_COMMIT_TAG}\") {
@@ -273,9 +302,8 @@ upload:
         ”freebsd-amd64”, ”freebsd-i386”,
         ”freebsd-arm64”, ”freebsd-arm”;
     - foreach (${releaseName} in ${releaseNameArray}) {
-        Invoke-WebRequest
-          -Uri "${CI_PROJECT_URL}/-/jobs/artifacts/${CI_COMMIT_TAG}/download?job=${releaseName}"
-          -OutFile ".\tcping-${releaseName}-${CI_COMMIT_TAG}.zip";
+        New-Item -Path ".\${releaseName}\" -ItemType Directory;
+        Move-Item "${CI_PROJECT_DIR}\artifacts\${releaseName}\*" ".\${releaseName}\";
       }
 
 #########################
@@ -293,18 +321,18 @@ release:
   script:
     - |
       release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
-        --assets-link "{\"name\":\"tcping-windows-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-windows-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-windows-i386-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-windows-i386-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-windows-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-windows-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-darwin-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-darwin-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-darwin-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-darwin-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-linux-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-linux-i386-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-i386-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-linux-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-linux-arm-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-arm-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-linux-mips-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-mips-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-linux-mipsle-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-linux-mipsle-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-freebsd-amd64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-amd64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-freebsd-i386-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-i386-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-freebsd-arm64-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-arm64-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping-freebsd-arm-${CI_COMMIT_TAG}.zip\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/tcping-freebsd-arm-${CI_COMMIT_TAG}.zip\",\"link_type\":\"package\"}"
+        --assets-link "{\"name\":\"tcping.exe (windows-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/windows-amd64/tcping.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping.exe (windows-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/windows-i386/tcping.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping.exe (windows-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/windows-arm64/tcping.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (darwin-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/darwin-amd64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (darwin-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/darwin-arm64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-amd64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-i386/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-arm64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-arm)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-arm/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mips)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-mips/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mipsle)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-mipsle/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-amd64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-i386/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-arm64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-arm)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-arm/tcping\",\"link_type\":\"package\"}"
