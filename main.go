@@ -18,6 +18,7 @@ var (
 	version     string
 	gitCommit   string
 	counter     int
+	proxy       string
 	timeout     string
 	interval    string
 	sigs        chan os.Signal
@@ -36,11 +37,11 @@ var rootCmd = cobra.Command{
 	Long:  "tcping is a ping over tcp connection",
 	Example: `
   1. ping over tcp
-	> tcping google.com
+	> tcping soraharu.com
   2. ping over tcp with custom port
-	> tcping google.com 443
+	> tcping soraharu.com 443
   3. ping over http
-  	> tcping -H google.com
+  	> tcping -H soraharu.com
   4. ping with URI schema
   	> tcping https://soraharu.com
 	`,
@@ -116,13 +117,17 @@ var rootCmd = cobra.Command{
 			ping.UseCustomeDNS(dnsServer)
 		}
 
-		parseHost := ping.FormatIP(host)
+		parseHost, _ := ping.FormatIP(host)
+		if len(parseHost) <= 0 {
+			parseHost = host
+		}
 		target := ping.Target{
 			Timeout:  timeoutDuration,
 			Interval: intervalDuration,
 			Host:     parseHost,
 			Port:     port,
 			Counter:  counter,
+			Proxy:    proxy,
 			Protocol: protocol,
 		}
 		var pinger ping.Pinger
@@ -161,6 +166,7 @@ var rootCmd = cobra.Command{
 func init() {
 	rootCmd.Flags().BoolVarP(&showVersion, "version", "v", false, "show the version and exit")
 	rootCmd.Flags().IntVarP(&counter, "counter", "c", 4, "ping counter")
+	rootCmd.Flags().StringVar(&proxy, "proxy", "", "Use HTTP proxy")
 	rootCmd.Flags().StringVarP(&timeout, "timeout", "T", "1s", `connect timeout, units are "ns", "us" (or "µs"), "ms", "s", "m", "h"`)
 	rootCmd.Flags().StringVarP(&interval, "interval", "I", "1s", `ping interval, units are "ns", "us" (or "µs"), "ms", "s", "m", "h"`)
 
