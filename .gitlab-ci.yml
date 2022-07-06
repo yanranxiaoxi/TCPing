@@ -287,7 +287,7 @@ upload:
   rules:
     - if: $CI_COMMIT_TAG
   script:
-    - Set-Location "D:\Website\wwwroot\downloadserver.soraharu.com\TCPing\";
+    - Set-Location "D:\wwwroot\downloadserver.soraharu.com\TCPing\";
     - if (Test-Path ".\${CI_COMMIT_TAG}\") {
         Remove-Item ".\${CI_COMMIT_TAG}\" -Recurse;
       }
