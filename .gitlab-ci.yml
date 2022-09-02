@@ -294,13 +294,13 @@ upload:
     - New-Item -Path ".\${CI_COMMIT_TAG}\" -ItemType Directory;
     - Set-Location ".\${CI_COMMIT_TAG}\";
     - ${releaseNameArray} =
-        ”windows-amd64”, “windows-i386”, ”windows-arm64”,
-        ”darwin-amd64”, ”darwin-arm64”,
-        ”linux-amd64”, ”linux-i386”,
-        ”linux-arm64”, ”linux-arm”,
-        ”linux-mips”, ”linux-mipsle”,
-        ”freebsd-amd64”, ”freebsd-i386”,
-        ”freebsd-arm64”, ”freebsd-arm”;
+        "windows-amd64", "windows-i386", "windows-arm64",
+        "darwin-amd64", "darwin-arm64",
+        "linux-amd64", "linux-i386",
+        "linux-arm64", "linux-arm",
+        "linux-mips", "linux-mipsle",
+        "freebsd-amd64", "freebsd-i386",
+        "freebsd-arm64", "freebsd-arm";
     - foreach (${releaseName} in ${releaseNameArray}) {
         New-Item -Path ".\${releaseName}\" -ItemType Directory;
         Move-Item "${CI_PROJECT_DIR}\artifacts\${releaseName}\*" ".\${releaseName}\";
