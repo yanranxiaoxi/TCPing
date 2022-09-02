@@ -283,12 +283,12 @@ freebsd-arm:
 upload:
   stage: upload
   tags:
-    - windows10shell
+    - windowsserver2022powershell
   rules:
     - if: $CI_COMMIT_TAG
   script:
     - Set-Location "D:\wwwroot\downloadserver.soraharu.com\TCPing\";
-    - if (Test-Path ".\${CI_COMMIT_TAG}\") {
+    - if (Test-Path -Path ".\${CI_COMMIT_TAG}\") {
         Remove-Item ".\${CI_COMMIT_TAG}\" -Recurse;
       }
     - New-Item -Path ".\${CI_COMMIT_TAG}\" -ItemType Directory;
@@ -321,18 +321,18 @@ release:
   script:
     - |
       release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
-        --assets-link "{\"name\":\"tcping.exe (windows-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/windows-amd64/tcping.exe\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping.exe (windows-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/windows-i386/tcping.exe\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping.exe (windows-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/windows-arm64/tcping.exe\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (darwin-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/darwin-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (darwin-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/darwin-arm64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-i386/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-arm64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-arm)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-arm/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-mips)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-mips/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-mipsle)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/linux-mipsle/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-i386/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-arm64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-arm)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/${CI_COMMIT_TAG}/freebsd-arm/tcping\",\"link_type\":\"package\"}"
+        --assets-link "{\"name\":\"tcping.exe (windows-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/windows-amd64/tcping.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping.exe (windows-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/windows-i386/tcping.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping.exe (windows-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/windows-arm64/tcping.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (darwin-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/darwin-amd64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (darwin-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/darwin-arm64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/linux-amd64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/linux-i386/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/linux-arm64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-arm)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/linux-arm/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mips)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/linux-mips/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mipsle)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/linux-mipsle/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-amd64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/freebsd-amd64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-i386)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/freebsd-i386/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-arm64)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/freebsd-arm64/tcping\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-arm)\",\"url\":\"https://downloadserver.soraharu.com:7000/TCPing/$CI_COMMIT_TAG/freebsd-arm/tcping\",\"link_type\":\"package\"}"
