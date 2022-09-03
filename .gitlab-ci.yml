@@ -17,6 +17,7 @@ test-ping:
     - go run ./main.go soraharu.com 443
     - go run ./main.go -H soraharu.com
     - go run ./main.go https://soraharu.com
+    - go test -v
 
 #########################
 #         Build         #
