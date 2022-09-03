@@ -17,8 +17,6 @@ test-ping:
     - go run ./main.go soraharu.com 443
     - go run ./main.go -H soraharu.com
     - go run ./main.go https://soraharu.com
-    - apk add gcc g++ make libffi-dev openssl-dev libtool
-    - go test -v
 
 #########################
 #         Build         #
