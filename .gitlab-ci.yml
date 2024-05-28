@@ -558,7 +558,7 @@ upload:
   tags:
     - linux
     - docker
-  images: docker.io/curlimages/curl:latest
+  image: docker.io/curlimages/curl:latest
   rules:
     - if: $CI_COMMIT_TAG
   script:
