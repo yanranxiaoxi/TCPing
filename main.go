@@ -3,16 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
-	"gitlab.soraharu.com/XiaoXi/TCPing/ping"
-	"gitlab.soraharu.com/XiaoXi/TCPing/ping/http"
-	"gitlab.soraharu.com/XiaoXi/TCPing/ping/tcp"
-	"github.com/spf13/cobra"
 	"net"
 	"net/url"
 	"os"
 	"os/signal"
 	"strconv"
 	"syscall"
+
+	"github.com/spf13/cobra"
+	"gitlab.soraharu.com/XiaoXi/TCPing/ping"
+	"gitlab.soraharu.com/XiaoXi/TCPing/ping/http"
+	"gitlab.soraharu.com/XiaoXi/TCPing/ping/tcp"
 )
 
 var (
@@ -79,7 +80,7 @@ var rootCmd = cobra.Command{
 			cmd.Printf("%s is invalid port.\n", defaultPort)
 			return
 		}
-		url.Host = fmt.Sprintf("%s:%d", url.Hostname(), port)
+		url.Host = ping.GetUrlHost(url.Hostname(), port)
 
 		timeoutDuration, err := ping.ParseDuration(timeout)
 		if err != nil {
@@ -110,7 +111,11 @@ var rootCmd = cobra.Command{
 				PreferGo: true,
 				Dial: func(ctx context.Context, network, address string) (conn net.Conn, err error) {
 					for _, addr := range dnsServer {
-						if conn, err = net.Dial("udp", addr+":53"); err != nil {
+						ipAddr, err := ping.FormatIP(addr)
+						if err != nil {
+							ipAddr = addr
+						}
+						if conn, err = net.Dial("udp", ipAddr+":53"); err != nil {
 							continue
 						} else {
 							return conn, nil

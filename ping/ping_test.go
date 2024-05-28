@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	tcping "gitlab.soraharu.com/XiaoXi/TCPing/ping"
 	"net/url"
 	"testing"
 	"time"
+
+	tcping "gitlab.soraharu.com/XiaoXi/TCPing/ping"
 )
 
 type PingHandler func(ctx context.Context) *tcping.Stats

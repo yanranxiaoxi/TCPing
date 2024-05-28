@@ -11,11 +11,12 @@ import (
 
 // FormatIP - trim spaces and format IP.
 //
-// IP - the provided IP
+// # IP - the provided IP
 //
 // string - return "" if the input is neither valid IPv4 nor valid IPv6
-//          return IPv4 in format like "192.168.9.1"
-//          return IPv6 in format like "[2002:ac1f:91c5:1::bd59]"
+//
+//	return IPv4 in format like "192.168.9.1"
+//	return IPv6 in format like "[2002:ac1f:91c5:1::bd59]"
 func FormatIP(IP string) (string, error) {
 
 	host := strings.Trim(IP, "[ ]")
@@ -38,8 +39,26 @@ func ParseDuration(t string) (time.Duration, error) {
 	return time.ParseDuration(t)
 }
 
+func GetUrlHost(host string, port int) string {
+	if port <= 0 {
+		return host
+	}
+	if ipAddr, err := FormatIP(host); err == nil {
+		return fmt.Sprintf("%s:%d", ipAddr, port)
+	}
+
+	return fmt.Sprintf("%s:%d", host, port)
+
+}
+
 // ParseAddress will try to parse addr as url.URL.
 func ParseAddress(addr string) (*url.URL, error) {
+	if ipAddr, err := FormatIP(addr); err == nil {
+		return &url.URL{
+			Scheme: "tcp",
+			Host:   ipAddr,
+		}, nil
+	}
 	if strings.Contains(addr, "://") {
 		// it maybe with scheme, try url.Parse
 		return url.Parse(addr)

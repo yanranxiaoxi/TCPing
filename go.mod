@@ -1,6 +1,6 @@
 module gitlab.soraharu.com/XiaoXi/TCPing
 
-go 1.18
+go 1.20
 
 require (
 	github.com/smartystreets/goconvey v1.7.2
