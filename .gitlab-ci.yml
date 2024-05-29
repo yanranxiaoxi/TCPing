@@ -563,64 +563,122 @@ upload:
   rules:
     - if: $CI_COMMIT_TAG
   script:
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-amd64/tcping.exe ${PACKAGE_REGISTRY_URL}/windows-amd64/tcping.exe
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-i386/tcping.exe ${PACKAGE_REGISTRY_URL}/windows-i386/tcping.exe
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-arm64/tcping.exe ${PACKAGE_REGISTRY_URL}/windows-arm64/tcping.exe
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/darwin-amd64/tcping ${PACKAGE_REGISTRY_URL}/darwin-amd64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/darwin-arm64/tcping ${PACKAGE_REGISTRY_URL}/darwin-arm64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-amd64/tcping ${PACKAGE_REGISTRY_URL}/linux-amd64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-i386/tcping ${PACKAGE_REGISTRY_URL}/linux-i386/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-arm64/tcping ${PACKAGE_REGISTRY_URL}/linux-arm64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv5/tcping ${PACKAGE_REGISTRY_URL}/linux-armv5/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv6/tcping ${PACKAGE_REGISTRY_URL}/linux-armv6/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv7/tcping ${PACKAGE_REGISTRY_URL}/linux-armv7/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips/tcping ${PACKAGE_REGISTRY_URL}/linux-mips/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips64/tcping ${PACKAGE_REGISTRY_URL}/linux-mips64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mipsle/tcping ${PACKAGE_REGISTRY_URL}/linux-mipsle/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips64le/tcping ${PACKAGE_REGISTRY_URL}/linux-mips64le/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-loong64/tcping ${PACKAGE_REGISTRY_URL}/linux-loong64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-ppc64/tcping ${PACKAGE_REGISTRY_URL}/linux-ppc64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-ppc64le/tcping ${PACKAGE_REGISTRY_URL}/linux-ppc64le/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-riscv64/tcping ${PACKAGE_REGISTRY_URL}/linux-riscv64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-amd64/tcping ${PACKAGE_REGISTRY_URL}/freebsd-amd64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-i386/tcping ${PACKAGE_REGISTRY_URL}/freebsd-i386/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-arm64/tcping ${PACKAGE_REGISTRY_URL}/freebsd-arm64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-armv6/tcping ${PACKAGE_REGISTRY_URL}/freebsd-armv6/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-armv7/tcping ${PACKAGE_REGISTRY_URL}/freebsd-armv7/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-riscv64/tcping ${PACKAGE_REGISTRY_URL}/freebsd-riscv64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/dragonfly-amd64/tcping ${PACKAGE_REGISTRY_URL}/dragonfly-amd64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/aix-ppc64/tcping ${PACKAGE_REGISTRY_URL}/aix-ppc64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/illumos-amd64/tcping ${PACKAGE_REGISTRY_URL}/illumos-amd64/tcping
+    # - |
+    #   curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/solaris-amd64/tcping ${PACKAGE_REGISTRY_URL}/solaris-amd64/tcping
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-amd64/tcping.exe ${PACKAGE_REGISTRY_URL}/windows-amd64/tcping.exe
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-amd64/tcping.exe ${PACKAGE_REGISTRY_URL}/tcping-windows-amd64.exe
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-i386/tcping.exe ${PACKAGE_REGISTRY_URL}/windows-i386/tcping.exe
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-i386/tcping.exe ${PACKAGE_REGISTRY_URL}/tcping-windows-i386.exe
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-arm64/tcping.exe ${PACKAGE_REGISTRY_URL}/windows-arm64/tcping.exe
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/windows-arm64/tcping.exe ${PACKAGE_REGISTRY_URL}/tcping-windows-arm64.exe
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/darwin-amd64/tcping ${PACKAGE_REGISTRY_URL}/darwin-amd64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/darwin-amd64/tcping ${PACKAGE_REGISTRY_URL}/tcping-darwin-amd64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/darwin-arm64/tcping ${PACKAGE_REGISTRY_URL}/darwin-arm64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/darwin-arm64/tcping ${PACKAGE_REGISTRY_URL}/tcping-darwin-arm64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-amd64/tcping ${PACKAGE_REGISTRY_URL}/linux-amd64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-amd64/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-amd64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-i386/tcping ${PACKAGE_REGISTRY_URL}/linux-i386/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-i386/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-i386
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-arm64/tcping ${PACKAGE_REGISTRY_URL}/linux-arm64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-arm64/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-arm64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv5/tcping ${PACKAGE_REGISTRY_URL}/linux-armv5/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv5/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-armv5
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv6/tcping ${PACKAGE_REGISTRY_URL}/linux-armv6/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv6/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-armv6
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv7/tcping ${PACKAGE_REGISTRY_URL}/linux-armv7/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-armv7/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-armv7
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips/tcping ${PACKAGE_REGISTRY_URL}/linux-mips/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-mips
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips64/tcping ${PACKAGE_REGISTRY_URL}/linux-mips64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips64/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-mips64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mipsle/tcping ${PACKAGE_REGISTRY_URL}/linux-mipsle/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mipsle/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-mipsle
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips64le/tcping ${PACKAGE_REGISTRY_URL}/linux-mips64le/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-mips64le/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-mips64le
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-loong64/tcping ${PACKAGE_REGISTRY_URL}/linux-loong64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-loong64/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-loong64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-ppc64/tcping ${PACKAGE_REGISTRY_URL}/linux-ppc64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-ppc64/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-ppc64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-ppc64le/tcping ${PACKAGE_REGISTRY_URL}/linux-ppc64le/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-ppc64le/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-ppc64le
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-riscv64/tcping ${PACKAGE_REGISTRY_URL}/linux-riscv64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/linux-riscv64/tcping ${PACKAGE_REGISTRY_URL}/tcping-linux-riscv64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-amd64/tcping ${PACKAGE_REGISTRY_URL}/freebsd-amd64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-amd64/tcping ${PACKAGE_REGISTRY_URL}/tcping-freebsd-amd64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-i386/tcping ${PACKAGE_REGISTRY_URL}/freebsd-i386/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-i386/tcping ${PACKAGE_REGISTRY_URL}/tcping-freebsd-i386
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-arm64/tcping ${PACKAGE_REGISTRY_URL}/freebsd-arm64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-arm64/tcping ${PACKAGE_REGISTRY_URL}/tcping-freebsd-arm64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-armv6/tcping ${PACKAGE_REGISTRY_URL}/freebsd-armv6/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-armv6/tcping ${PACKAGE_REGISTRY_URL}/tcping-freebsd-armv6
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-armv7/tcping ${PACKAGE_REGISTRY_URL}/freebsd-armv7/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-armv7/tcping ${PACKAGE_REGISTRY_URL}/tcping-freebsd-armv7
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-riscv64/tcping ${PACKAGE_REGISTRY_URL}/freebsd-riscv64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/freebsd-riscv64/tcping ${PACKAGE_REGISTRY_URL}/tcping-freebsd-riscv64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/dragonfly-amd64/tcping ${PACKAGE_REGISTRY_URL}/dragonfly-amd64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/dragonfly-amd64/tcping ${PACKAGE_REGISTRY_URL}/tcping-dragonfly-amd64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/aix-ppc64/tcping ${PACKAGE_REGISTRY_URL}/aix-ppc64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/aix-ppc64/tcping ${PACKAGE_REGISTRY_URL}/tcping-aix-ppc64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/illumos-amd64/tcping ${PACKAGE_REGISTRY_URL}/illumos-amd64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/illumos-amd64/tcping ${PACKAGE_REGISTRY_URL}/tcping-illumos-amd64
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/solaris-amd64/tcping ${PACKAGE_REGISTRY_URL}/solaris-amd64/tcping
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./artifacts/solaris-amd64/tcping ${PACKAGE_REGISTRY_URL}/tcping-solaris-amd64
 
 #########################
 #        Release        #
@@ -639,32 +697,61 @@ release:
   script:
     - |
       release-cli create --name "Release $PACKAGE_VERSION" --tag-name $CI_COMMIT_TAG \
-        --assets-link "{\"name\":\"tcping.exe (windows-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/windows-amd64/tcping.exe\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping.exe (windows-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/windows-i386/tcping.exe\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping.exe (windows-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/windows-arm64/tcping.exe\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (darwin-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/darwin-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (darwin-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/darwin-arm64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-i386/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-arm64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-armv5)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-armv5/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-armv6)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-armv6/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-armv7)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-armv7/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-mips)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mips/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-mips64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mips64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-mipsle)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mipsle/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-mips64le)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mips64le/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-loong64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-loong64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-ppc64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-ppc64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-ppc64le)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-ppc64le/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (linux-riscv64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-riscv64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-i386/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-arm64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-armv6)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-armv6/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-armv7)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-armv7/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (freebsd-riscv64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-riscv64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (dragonfly-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/dragonfly-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (aix-ppc64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/aix-ppc64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (illumos-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/illumos-amd64/tcping\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"tcping (solaris-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/solaris-amd64/tcping\",\"link_type\":\"package\"}"
+        # --assets-link "{\"name\":\"tcping.exe (windows-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/windows-amd64/tcping.exe\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping.exe (windows-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/windows-i386/tcping.exe\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping.exe (windows-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/windows-arm64/tcping.exe\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (darwin-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/darwin-amd64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (darwin-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/darwin-arm64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-amd64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-i386/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-arm64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-armv5)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-armv5/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-armv6)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-armv6/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-armv7)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-armv7/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-mips)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mips/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-mips64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mips64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-mipsle)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mipsle/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-mips64le)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-mips64le/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-loong64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-loong64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-ppc64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-ppc64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-ppc64le)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-ppc64le/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (linux-riscv64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/linux-riscv64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (freebsd-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-amd64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (freebsd-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-i386/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (freebsd-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-arm64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (freebsd-armv6)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-armv6/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (freebsd-armv7)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-armv7/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (freebsd-riscv64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/freebsd-riscv64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (dragonfly-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/dragonfly-amd64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (aix-ppc64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/aix-ppc64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (illumos-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/illumos-amd64/tcping\",\"link_type\":\"package\"}" \
+        # --assets-link "{\"name\":\"tcping (solaris-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/solaris-amd64/tcping\",\"link_type\":\"package\"}"
+        --assets-link "{\"name\":\"tcping.exe (windows-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-windows-amd64.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping.exe (windows-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-windows-i386.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping.exe (windows-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-windows-arm64.exe\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (darwin-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-darwin-amd64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (darwin-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-darwin-arm64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-amd64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-i386\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-arm64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-armv5)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-armv5\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-armv6)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-armv6\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-armv7)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-armv7\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mips)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-mips\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mips64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-mips64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mipsle)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-mipsle\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-mips64le)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-mips64le\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-loong64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-loong64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-ppc64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-ppc64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-ppc64le)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-ppc64le\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (linux-riscv64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-linux-riscv64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-freebsd-amd64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-i386)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-freebsd-i386\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-arm64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-freebsd-arm64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-armv6)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-freebsd-armv6\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-armv7)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-freebsd-armv7\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (freebsd-riscv64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-freebsd-riscv64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (dragonfly-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-dragonfly-amd64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (aix-ppc64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-aix-ppc64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (illumos-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-illumos-amd64\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"tcping (solaris-amd64)\",\"url\":\"${PACKAGE_REGISTRY_URL}/tcping-solaris-amd64\",\"link_type\":\"package\"}"
