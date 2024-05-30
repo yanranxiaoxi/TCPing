@@ -1,15 +1,18 @@
 {
 	"cSpell.words": [
 		"Alives",
+		"armv",
 		"downloadserver",
 		"GOARCH",
 		"GOARM",
 		"goconvey",
 		"GOMIPS",
+		"illumos",
 		"linuxdocker",
 		"loong",
 		"MIPSLE",
 		"pkgurl",
+		"riscv",
 		"softfloat",
 		"soraharu",
 		"tcping",

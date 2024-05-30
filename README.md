@@ -6,7 +6,7 @@
 
 ## 🤔 这是什么
 
-一款能够便捷测试端口 TCP/HTTP 协议连通性的命令行工具，使用 Golang 编写，适配 Windows、Linux、FreeBSD 操作系统以及 x86、amd64、arm、arm64、mips、mipsle 处理器架构。
+一款能够便捷测试端口 TCP/HTTP 协议连通性的命令行工具，使用 Golang 编写，适配 Windows、MacOS、Linux、FreeBSD、DragonFly、AIX、illumos、Solaris 操作系统以及 x86、amd64、armv5、armv6、armv7、arm64、mips、mipsle、mips64、mips64le、riscv64、ppc64、ppc64le、loong64 处理器架构。
 
 你可以在本项目的 [软件包库](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/2) 找到适用的系统和架构版本。
 
