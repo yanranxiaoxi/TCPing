@@ -1,54 +1,62 @@
+[English](#) | [简体中文](./README.zh-Hans.md)
+
 # TCPing
 
-⭐ 测试端口 TCP/HTTP 协议连通性命令行工具 ⭐
+⭐ Command line tool to test port TCP/HTTP protocol connectivity ⭐
 
 [![pipeline status](https://gitlab.soraharu.com/XiaoXi/TCPing/badges/master/pipeline.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/commits/master) [![Latest Release](https://gitlab.soraharu.com/XiaoXi/TCPing/-/badges/release.svg)](https://gitlab.soraharu.com/XiaoXi/TCPing/-/releases)
 
-## 🤔 这是什么
+> The source code for this tool is based on [Cloverstd](https://github.com/cloverstd)/[tcping](https://github.com/cloverstd/tcping), which was created by [@XiaoXi](https://soraharu.com/) in Forked in 2021 and continues to be maintained, merging some of the original project code halfway through.
 
-一款能够便捷测试端口 TCP/HTTP 协议连通性的命令行工具，使用 Golang 编写，适配 Windows、MacOS、Linux、FreeBSD、DragonFly、AIX、illumos、Solaris 操作系统以及 x86、amd64、armv5、armv6、armv7、arm64、mips、mipsle、mips64、mips64le、riscv64、ppc64、ppc64le、loong64 处理器架构。
+> Support for IPv6 comes from a [pull request](https://github.com/cloverstd/tcping/pull/38) submitted by [yuqaf1989](https://github.com/yuqaf1989) in the original project.
 
-你可以在本项目的 [软件包库](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/2) 找到适用的系统和架构版本。
+## 🤔 What is this
 
-## 🍭 使用说明
+A command line tool to easily test port TCP/HTTP protocol connectivity, written in Golang for Windows, MacOS, Linux, FreeBSD, DragonFly, AIX, illumos, Solaris and x86, amd64, armv5, armv6, armv7, arm64, mips, mipsle, mips64, mips64le, riscv64, ppc64, ppc64le, loong64 processor architectures.
 
-**你可以使用该指令测试 TCP 端口：**
+You can find pre-compiled binary executables for applicable systems and architectures in the [package repository](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/2) for this project.
+
+## 🍭 Instructions for Use
+
+Please **compile it yourself** or get the executable from the [package repository](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/2) of this project.
+
+**You can use this command to test TCP ports:**
 
 ```shell
 tcping soraharu.com 443
 ```
 
-*该指令将会测试 `soraharu.com` 服务器的 `443` 端口是否开放，如果指令结尾不指定端口号，则默认值 `80` 将会被使用
+> This command will test if the `soraharu.com` server's `443` port is open or not, if the port number is not specified at the end of the command, the default value of `80` will be used
 
-**你还可以使用以下指令测试 HTTP 服务：**
+**You can also test the HTTP service using the following command:**
 
 ```shell
 tcping -H soraharu.com
 ```
 
-或者
+or
 
 ```shell
 tcping http://soraharu.com
 ```
 
-*以上指令将会测试 `http://soraharu.com:80` 是否允许连接
+> The above command will test if `http://soraharu.com:80` is allowed to connect.
 
-**其他帮助：**
+**Other help:**
 
-你可以在 `tcping` 后添加参数 `-h` 或 `--help` 查看更多使用方法
+You can add the parameter `-h` or `--help` after `tcping` to see how to use it.
 
 ```shell
 tcping -h
 ```
 
-## 🏃 默认参数
+## 🏃 Default Parameters
 
-- `ping` 的默认次数为 `4`
-- 如果不指定端口，则默认为 `80`
-- `ping` 的默认时间间隔为 `1s`
-- `ping` 的默认超时时间为 `1s`
+- The default number of `ping`s is `4`.
+- If no port is specified, the default is `80`.
+- The default time interval for `ping` is `1s`.
+- The default timeout for `ping` is `1s`.
 
-## 📜 开源许可
+## 📜 Open Source License
 
-基于 [MIT License](https://choosealicense.com/licenses/mit/) 许可进行开源。
+Open source based on the [MIT License](https://choosealicense.com/licenses/mit/) license.
