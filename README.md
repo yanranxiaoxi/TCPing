@@ -14,11 +14,11 @@
 
 A command line tool to easily test port TCP/HTTP protocol connectivity, written in Golang for Windows, MacOS, Linux, FreeBSD, DragonFly, AIX, illumos, Solaris and x86, amd64, armv5, armv6, armv7, arm64, mips, mipsle, mips64, mips64le, riscv64, ppc64, ppc64le, loong64 processor architectures.
 
-You can find pre-compiled binary executables for applicable systems and architectures in the [package repository](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/2) for this project.
+You can find pre-compiled binary executables for applicable systems and architectures in the [package repository](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/3) for this project.
 
 ## 🍭 Instructions for Use
 
-Please **compile it yourself** or get the executable from the [package repository](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/2) of this project.
+Please **compile it yourself** or get the executable from the [package repository](https://gitlab.soraharu.com/XiaoXi/TCPing/-/packages/3) of this project.
 
 **You can use this command to test TCP ports:**
 
